@@ -98,7 +98,7 @@
   "stars": "★★★★★",
   "label": "Google Rating",
   "heading": "Rated by our customers on Google",
-  "text": "RNS Construction Mohali is rated 5.0 out of 5 by customers on its verified Google Business Profile. Read genuine customer reviews and see what people say about our work.",
+  "text": "RNS Construction Mohali is rated 5.0 out of 11 by customers on its verified Google Business Profile. Read genuine customer reviews and see what people say about our work.",
   "linkText": "View Google Reviews",
   "linkUrl": "https://share.google/OkGZxYW0gj5gXvu1u",
   "items": []
@@ -241,6 +241,7 @@
  ],
  "scripts": [],
  "managed": {
-  "projects": true
+  "projects": true,
+  "reviews": true
  }
 }
