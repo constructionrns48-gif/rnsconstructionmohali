@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<meta name="rns-api" content="https://rns-admin-api.constructionrns48.workers.dev">
+<title>RNS Admin</title>
+<style>
+*{box-sizing:border-box;margin:0;font-family:Inter,-apple-system,Segoe UI,Arial,sans-serif}
+:root{--n:#0f1e33;--o:#e8801a;--bg:#f4f6f9;--c:#fff;--t:#1c2635;--m:#6b7788;--l:#e3e8ef}
+body{background:var(--bg);color:var(--t);font-size:14px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800}
+.mk{width:38px;height:38px;border-radius:10px;background:var(--o);color:#fff;display:grid;place-items:center;font-size:15px;flex:none}
+.btn{background:var(--o);color:#fff;border-radius:10px;padding:11px 18px;font-weight:700;font-size:14px;display:inline-block;text-align:center;border:0;cursor:pointer;text-decoration:none}
+.btn.g{background:#fff;color:var(--n);border:1px solid var(--l)}
+.btn.sm{padding:7px 12px;font-size:12px}.btn.d{background:#fff;color:#b3261e;border:1px solid #f0c9c6}
+.btn:disabled{opacity:.5;cursor:default}
+.card{background:var(--c);border:1px solid var(--l);border-radius:14px;padding:18px;margin-top:18px}
+.card:first-child{margin-top:0}
+input,textarea,select{font:inherit;width:100%;border:1px solid var(--l);border-radius:10px;padding:11px 13px;font-size:14px;background:#fff;margin-top:6px;color:var(--t)}
+textarea{min-height:90px;resize:vertical;line-height:1.5}
+textarea.code{font-family:ui-monospace,Menlo,monospace;font-size:13px;background:#0f1e33;color:#9fd3a8;min-height:130px}
+label{font-size:12px;font-weight:700;color:var(--m);display:block;margin-top:14px;text-transform:uppercase}
+label.ck{display:flex;gap:8px;align-items:center;text-transform:none;font-size:14px;color:var(--t);font-weight:600}
+label.ck input{width:auto;margin:0}
+.tag{font-size:11px;padding:3px 9px;border-radius:20px;background:#fdeedd;color:#b45f0b;font-weight:700;border:0;display:inline-block;cursor:default;white-space:nowrap}
+.tag.ok{background:#e0f5e8;color:#1a7a3e}.tag.dr{background:#e8ecf2;color:#556}.tag.on{background:var(--o);color:#fff}
+button.tag{cursor:pointer}
+.th{width:54px;height:54px;border-radius:10px;background:#b9c4d3 center/cover;flex:none}
+.row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--l)}
+.row:last-child{border:0}.row.sel{background:#fdf4ea;margin:0 -10px;padding:12px 10px;border-radius:8px}
+.grow{flex:1;min-width:0}.sm{font-size:12px;color:var(--m)}.b{font-weight:700}
+.hd{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px}.hd .b{flex:1;font-size:15px}
+.login{min-height:100vh;display:grid;place-items:center;background:linear-gradient(160deg,#0f1e33,#1c3556);padding:16px}
+.lb{background:#fff;border-radius:18px;padding:34px;width:min(400px,100%)}
+#app{display:none}
+.side{position:fixed;left:0;top:0;bottom:0;width:230px;background:var(--n);color:#cfd8e6;padding:22px 16px;overflow:auto}
+.side .logo{color:#fff;margin-bottom:26px}
+.nav{padding:11px 12px;border-radius:10px;font-size:14px;margin-bottom:4px;cursor:pointer}
+.nav:hover{background:#1c3556}.nav.a{background:var(--o);color:#fff;font-weight:700}
+.main{margin-left:230px;padding:26px 32px 60px}
+.top{display:none}
+.bar{display:none}
+.ph{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.ph h1{font-size:24px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+.stats .card{margin:0;cursor:pointer}.stats b{font-size:26px;display:block}
+.g2{display:grid;grid-template-columns:1.3fr 1fr;gap:18px}.g2 .card{margin:0}
+.blogg{display:grid;grid-template-columns:1fr 1.4fr;gap:18px;align-items:start}.blogg .card{margin:0}
+.tb{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}.tb .btn{padding:6px 11px}
+.card .b+label,.card .hd+label{margin-top:12px!important}
+.hint{font-size:12px;color:var(--m);margin-top:5px}
+.gap{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+#toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--n);color:#fff;padding:12px 18px;border-radius:12px;font-size:14px;display:none;z-index:50;max-width:90vw}
+.modal{position:fixed;inset:0;background:rgba(15,30,51,.6);display:none;place-items:center;z-index:40;padding:16px}
+.modal>div{background:#fff;border-radius:16px;padding:22px;width:min(520px,100%);max-height:88vh;overflow:auto}
+.modal h3{margin-bottom:10px}.modal li{margin:6px 0 6px 18px}
+@media(max-width:899px){
+ .side{transform:translateX(-100%);transition:.2s;z-index:30}.side.open{transform:none}
+ .main{margin:0;padding:16px 16px 100px}
+ .top{display:flex;align-items:center;gap:10px;background:var(--n);color:#fff;padding:14px 16px;position:sticky;top:0;z-index:20}
+ .top .hm{font-size:24px;cursor:pointer;padding:0 4px}
+ .ph .acts{display:none}.ph h1{font-size:20px}
+ .stats{grid-template-columns:repeat(2,1fr)}.g2,.blogg,.gap{grid-template-columns:1fr}
+ .bar{display:flex;gap:10px;position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--l);padding:12px 16px;z-index:20}.bar .btn{flex:1}
+}
+</style></head><body>
+<div id="login" class="login"><form class="lb" id="lf"><div class="logo"><div class="mk">RNS</div><div>RNS Construction<div class="sm" style="font-weight:500">Admin Panel</div></div></div>
+<h2 style="margin-top:26px">Welcome back</h2><div class="sm" style="margin-top:4px">Sign in to manage rnsconstructionmohali.com</div>
+<label>Email</label><input id="em" type="email" autocomplete="username" placeholder="admin@rnsconstructionmohali.com">
+<label>Password</label><input id="pw" type="password" autocomplete="current-password" placeholder="Password">
+<div id="le" class="sm" style="color:#b3261e;margin-top:10px;min-height:16px"></div>
+<button class="btn" id="lbtn" style="width:100%;margin-top:10px">Sign in</button><div class="sm" style="text-align:center;margin-top:16px">Secure login · Only the site owner can edit</div></form></div>
+<div id="app">
+<div class="top"><span class="hm" id="hm">☰</span><div class="mk">RNS</div><div class="grow"><div class="b">RNS Admin</div><div class="sm" id="tt" style="color:#9fb0c8"></div></div></div>
+<div class="side" id="side"><div class="logo"><div class="mk">RNS</div>RNS Admin</div><div id="nav"></div></div>
+<div class="main" id="main"></div>
+<div class="bar"><button class="btn g" onclick="preview()">Preview</button><button class="btn" onclick="askPublish()">Publish changes</button></div>
+</div>
+<div id="toast"></div><div class="modal" id="modal"><div id="mb"></div></div>
+<script id="seed" type="application/json">null</script>
+<script>
+var API=(document.querySelector('meta[name=rns-api]').content||'').replace(/\/$/,''),DEMO=!API;
+var NAV=[['dashboard','Dashboard'],['projects','Projects & Photos'],['packages','Prices & Packages'],['reviews','Reviews'],['blog','Blog'],['services','Services'],['scripts','Scripts'],['settings','Settings']];
+var SEC=['projects','packages','reviews','blog','services','scripts'];
+var LABEL={projects:'Projects & Photos',packages:'Prices & Packages',reviews:'Reviews',blog:'Blog',services:'Services',scripts:'Scripts'};
+var S={c:null,base:null,files:{},view:'dashboard',token:sessionStorage.getItem('rns_tok')||'',post:null,script:{id:'',name:'',placement:'head',pages:'all',code:'',enabled:true}};
+var $=function(i){return document.getElementById(i)};
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function clone(o){return JSON.parse(JSON.stringify(o))}
+function jumpEnd(){var c=$('main').querySelectorAll('.card'),l=c[c.length-1];try{if(l)l.style.scrollMarginTop='70px';(l||$('main')).scrollIntoView({block:'start'})}catch(e){window.scrollTo(0,document.body.scrollHeight)}}
+function jumpTop(){try{$('app').scrollIntoView({block:'start'})}catch(e){window.scrollTo(0,0)}}
+function toast(m,ms){var t=$('toast');t.textContent=m;t.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(function(){t.style.display='none'},ms||3500)}
+function api(path,opt){opt=opt||{};opt.headers=Object.assign({'content-type':'application/json'},S.token?{authorization:'Bearer '+S.token}:{},opt.headers||{});
+ return fetch(API+path,opt).then(function(r){return r.json().catch(function(){return{}}).then(function(j){if(r.status===401&&S.token){logout(true)}if(!r.ok)throw new Error(j.error||('Error '+r.status));return j})})}
+/* ---------- login ---------- */
+$('lf').onsubmit=function(e){e.preventDefault();var b=$('lbtn');b.disabled=true;$('le').textContent='';
+ var p=$('pw').value;
+ if(API==='WORKER_URL_HERE'){$('le').textContent='Admin backend is not connected yet.';b.disabled=false;return}
+ if(DEMO){if(p==='demo'){S.token='demo';sessionStorage.setItem('rns_tok','demo');start()}else $('le').textContent='Wrong password (demo password: demo)';b.disabled=false;return}
+ api('/api/login',{method:'POST',body:JSON.stringify({password:p})}).then(function(j){S.token=j.token;sessionStorage.setItem('rns_tok',j.token);start()}).catch(function(er){$('le').textContent=er.message}).then(function(){b.disabled=false})};
+function logout(expired){S.token='';sessionStorage.removeItem('rns_tok');$('app').style.display='none';$('login').style.display='grid';$('pw').value='';if(expired)$('le').textContent='Session expired. Sign in again.'}
+function start(){load().then(function(){$('login').style.display='none';$('app').style.display='block';go('dashboard')}).catch(function(e){$('le').textContent='Could not load content: '+e.message})}
+function load(){var p=DEMO?Promise.resolve(JSON.parse($('seed').textContent)):fetch('/content/content.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('content.json not found');return r.json()});
+ return p.then(function(c){c.managed=c.managed||{};S.base=clone(c);S.c=clone(c);try{var d=JSON.parse(localStorage.getItem('rns_draft')||'null');if(d&&d.c){S.c=d.c;S.files=d.files||{};setTimeout(function(){toast('Restored your unpublished changes')},400)}}catch(e){}})}
+function save(){try{localStorage.setItem('rns_draft',JSON.stringify({c:S.c,files:S.files}))}catch(e){}refreshNav()}
+/* ---------- state helpers ---------- */
+function changed(){return SEC.filter(function(s){return JSON.stringify(S.c[s])!==JSON.stringify(S.base[s])})}
+function touch(sec){S.c.managed[sec]=true}
+function setp(path,v){var a=path.split('.'),o=S.c;for(var i=0;i<a.length-1;i++)o=o[a[i]];o[a[a.length-1]]=v}
+document.addEventListener('input',function(e){var t=e.target;if(t.dataset&&t.dataset.p){var v=t.type==='checkbox'?t.checked:t.value;if(t.dataset.lines)v=v.split('\n').map(function(x){return x.trim()}).filter(Boolean);setp(t.dataset.p,v);touch(t.dataset.p.split('.')[0]);if(t.dataset.p.indexOf('blog')===0)S.post=S.post;save();if(t.dataset.p==='blog.'+postIdx()+'.title'&&!S.c.blog[postIdx()].slugTouched&&!S.base.blog.some(function(x){return x.id===S.c.blog[postIdx()].id})){S.c.blog[postIdx()].slug=slugify(v);var s=$('slugf');if(s)s.value=S.c.blog[postIdx()].slug}}
+ else if(t.dataset&&t.dataset.sc){S.script[t.dataset.sc]=t.value}
+ if(t.dataset&&t.dataset.slug){S.c.blog[postIdx()].slugTouched=true}});
+function slugify(s){return String(s).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,60)}
+function postIdx(){return S.c.blog.findIndex(function(p){return p.id===S.post})}
+/* ---------- nav / shell ---------- */
+function refreshNav(){var n=changed().length;$('nav').innerHTML=NAV.map(function(x){return'<div class="nav'+(x[0]===S.view?' a':'')+'" data-go="'+x[0]+'">'+x[1]+'</div>'}).join('');
+ $('tt').textContent=(NAV.filter(function(x){return x[0]===S.view})[0]||[0,''])[1];var u=$('unp');if(u)u.innerHTML=unpHtml()}
+document.addEventListener('click',function(e){var t=e.target.closest('[data-go],[data-act]');if(!t)return;window.__lastBtn=t;
+ if(t.dataset.go){go(t.dataset.go);$('side').classList.remove('open')}else if(t.dataset.act){acts[t.dataset.act]&&acts[t.dataset.act](t.dataset)}});
+$('main').addEventListener('click',function(){$('side').classList.remove('open')});
+$('hm').onclick=function(){$('side').classList.toggle('open')};
+function go(v){S.view=v;render();jumpTop()}
+function head(t,sub){return'<div class="ph"><div class="grow"><h1>'+t+'</h1><div class="sm">'+sub+'</div></div><div class="acts"><button class="btn g" onclick="preview()" style="margin-right:8px">Preview</button><button class="btn" onclick="askPublish()">Publish changes</button></div></div>'}
+function unpHtml(){var c=changed();return'<div class="b">Unpublished changes</div><div class="sm" style="margin-top:4px">'+(c.length?(c.length+' section'+(c.length>1?'s':'')+' edited: '+c.map(function(x){return LABEL[x]}).join(', ')+'. Tap Publish changes to update the live site (takes about 1 minute).'):'No pending changes.')+'</div>'}
+function render(){refreshNav();var m=$('main');var v=S.view;m.innerHTML=({dashboard:vDash,projects:vProjects,packages:vPackages,reviews:vReviews,blog:vBlog,services:vServices,scripts:vScripts,settings:vSettings})[v]()}
+/* ---------- dashboard ---------- */
+function vDash(){var c=S.c;var pk=c.packages.slice(0,3);
+ return head('Dashboard','Edit your site content. Nothing goes live until you Publish.')+
+ '<div class="stats">'+[['projects','Projects',c.projects.length],['packages','Packages',c.packages.length],['reviews','Reviews',(c.reviews.items||[]).length],['services','Services',c.services.length]].map(function(x){return'<div class="card" data-go="'+x[0]+'"><span class="sm">'+x[1]+'</span><b>'+x[2]+'</b></div>'}).join('')+'</div>'+
+ '<div class="g2"><div class="card"><div class="hd"><div class="b">Projects &amp; Photos</div><button class="tag" data-act="newProject">+ Add project</button></div>'+
+ c.projects.slice(0,3).map(function(p){return'<div class="row" data-go="projects" style="cursor:pointer"><div class="th" style="background-image:url(\''+esc(imgSrc(p.image))+'\')"></div><div class="grow"><div class="b">'+esc(p.title)+'</div><div class="sm">'+esc(p.desc).slice(0,50)+'</div></div><span class="tag ok">Live</span></div>'}).join('')+'</div>'+
+ '<div class="card"><div class="b">Prices &amp; Packages</div>'+pk.map(function(p,i){return'<label>'+esc(p.name)+'</label><input data-p="packages.'+i+'.price" value="'+esc(p.price)+'">'}).join('')+'<div class="hint">Edit the price here or open Prices &amp; Packages for full details.</div></div></div>'+
+ '<div class="card" id="unp">'+unpHtml()+'</div>'}
+function imgSrc(p){return S.files[p]?S.files[p].dataUrl:p}
+/* ---------- image upload ---------- */
+function stat(m){var b=window.__lastBtn;if(b&&b.isConnected)b.textContent=m;toast(m,6000)}
+function pickImage(cb){var o=document.getElementById('pickIn');if(o)o.remove();var i=document.createElement('input');i.type='file';i.id='pickIn';i.accept='image/*';i.style.cssText='position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none';document.body.appendChild(i);var done=false;var h=function(){if(done)return;var f=i.files&&i.files[0];if(!f)return;done=true;stat('Photo selected, adding...');compress(f).then(function(r){cb(r);toast('Photo added')}).catch(function(e){stat('Photo failed: '+(e&&e.message||e))}).then(function(){i.remove()})};i.addEventListener('change',h);i.addEventListener('input',h);i.click()}
+function compress(file){return new Promise(function(res,rej){function fin(src,w,h,draw){var k=Math.min(1,1400/Math.max(w,h));var cv=document.createElement('canvas');cv.width=Math.max(1,Math.round(w*k));cv.height=Math.max(1,Math.round(h*k));cv.getContext('2d').drawImage(draw,0,0,cv.width,cv.height);var type='image/webp',ext='webp';var d=cv.toDataURL(type,.82);if(d.indexOf('data:image/webp')!==0){type='image/jpeg';ext='jpg';d=cv.toDataURL(type,.84)}res({path:'uploads/img-'+Date.now().toString(36)+Math.random().toString(36).slice(2,5)+'.'+ext,dataUrl:d,base64:d.split(',')[1]})}
+ function viaBitmap(){if(!window.createImageBitmap)return rej(new Error('unreadable file ('+(file.type||'unknown type')+')'));createImageBitmap(file).then(function(bm){fin(null,bm.width,bm.height,bm)}).catch(function(){rej(new Error('unreadable file ('+(file.type||'unknown type')+')'))})}
+ var fr=new FileReader();fr.onerror=function(){viaBitmap()};fr.onload=function(){var im=new Image();im.onload=function(){try{fin(null,im.naturalWidth,im.naturalHeight,im)}catch(e){rej(e)}};im.onerror=viaBitmap;im.src=fr.result};fr.readAsDataURL(file)})}
+function addFile(f){S.files['/'+f.path]={dataUrl:f.dataUrl,base64:f.base64};return'/'+f.path}
+/* ---------- projects ---------- */
+function vProjects(){var l=S.c.projects;return head('Projects &amp; Photos','Photos are resized automatically so pages stay fast.')+
+ '<div class="hd"><div class="b">'+l.length+' projects</div><button class="btn sm" data-act="newProject">+ Add project</button></div>'+
+ l.map(function(p,i){return'<div class="card"><div style="display:flex;gap:12px"><div class="th" style="width:84px;height:84px;background-image:url(\''+esc(imgSrc(p.image))+'\')"></div><div class="grow"><label style="margin-top:0">Title</label><input data-p="projects.'+i+'.title" value="'+esc(p.title)+'"></div></div>'+
+ '<label>Description</label><textarea data-p="projects.'+i+'.desc" style="min-height:64px">'+esc(p.desc)+'</textarea>'+
+ '<div class="tb"><button class="btn g sm" data-act="projPhoto" data-i="'+i+'">Change photo</button><button class="btn g sm" data-act="mv" data-s="projects" data-i="'+i+'" data-d="-1">↑</button><button class="btn g sm" data-act="mv" data-s="projects" data-i="'+i+'" data-d="1">↓</button><button class="btn d sm" data-act="rm" data-s="projects" data-i="'+i+'">Remove</button></div></div>'}).join('')}
+/* ---------- packages ---------- */
+function vPackages(){var l=S.c.packages;return head('Prices &amp; Packages','Shown on the home page and Services page.')+
+ '<div class="hd"><div class="b">'+l.length+' packages</div><button class="btn sm" data-act="newPackage">+ Add package</button></div>'+
+ l.map(function(p,i){var q='packages.'+i+'.';return'<div class="card"><label style="margin-top:0">Package name</label><input data-p="'+q+'name" value="'+esc(p.name)+'">'+
+ '<label>Short description</label><input data-p="'+q+'desc" value="'+esc(p.desc)+'">'+
+ '<div class="gap"><div><label>Price</label><input data-p="'+q+'price" value="'+esc(p.price)+'"></div><div><label>Unit</label><input data-p="'+q+'unit" value="'+esc(p.unit)+'"></div></div>'+
+ '<label>Included (one per line)</label><textarea data-lines="1" data-p="'+q+'features">'+esc((p.features||[]).join('\n'))+'</textarea>'+
+ '<label class="ck"><input type="checkbox" data-p="'+q+'hot"'+(p.hot?' checked':'')+'> Highlight as most popular</label>'+
+ '<div class="tb"><button class="btn g sm" data-act="mv" data-s="packages" data-i="'+i+'" data-d="-1">↑</button><button class="btn g sm" data-act="mv" data-s="packages" data-i="'+i+'" data-d="1">↓</button><button class="btn d sm" data-act="rm" data-s="packages" data-i="'+i+'">Remove</button></div></div>'}).join('')}
+/* ---------- reviews ---------- */
+function vReviews(){var r=S.c.reviews;return head('Reviews','Rating card plus optional customer reviews.')+
+ '<div class="card"><div class="b">Rating card</div><div class="gap"><div><label>Score</label><input data-p="reviews.score" value="'+esc(r.score)+'"></div><div><label>Stars</label><input data-p="reviews.stars" value="'+esc(r.stars)+'"></div></div>'+
+ '<label>Label</label><input data-p="reviews.label" value="'+esc(r.label)+'"><label>Heading</label><input data-p="reviews.heading" value="'+esc(r.heading)+'"><label>Text</label><textarea data-p="reviews.text">'+esc(r.text)+'</textarea>'+
+ '<div class="gap"><div><label>Button text</label><input data-p="reviews.linkText" value="'+esc(r.linkText)+'"></div><div><label>Button link</label><input data-p="reviews.linkUrl" value="'+esc(r.linkUrl)+'"></div></div></div>'+
+ '<div class="hd" style="margin-top:18px"><div class="b">Customer reviews ('+(r.items||[]).length+')</div><button class="btn sm" data-act="newReview">+ Add review</button></div>'+
+ (r.items||[]).map(function(x,i){var q='reviews.items.'+i+'.';return'<div class="card"><div class="gap"><div><label style="margin-top:0">Name</label><input data-p="'+q+'name" value="'+esc(x.name)+'"></div><div><label style="margin-top:0">Place</label><input data-p="'+q+'place" value="'+esc(x.place||'')+'"></div></div>'+
+ '<label>Stars (1-5)</label><input type="number" min="1" max="5" data-p="'+q+'stars" value="'+esc(x.stars)+'"><label>Review</label><textarea data-p="'+q+'text">'+esc(x.text)+'</textarea><div class="tb"><button class="btn d sm" data-act="rmRev" data-i="'+i+'">Remove</button></div></div>'}).join('')+
+ '<div class="hint" style="margin-top:12px">Only add reviews real customers have given you.</div>'}
+/* ---------- services ---------- */
+function vServices(){return head('Services','Edit the text of your 6 services. Page links stay the same.')+S.c.services.map(function(s,i){var q='services.'+i+'.';return'<div class="card"><div class="b">'+esc(s.title)+'</div><div class="sm">'+esc(s.href)+'</div>'+
+ '<label>Home page card title</label><input data-p="'+q+'title" value="'+esc(s.title)+'"><label>Home page card text</label><textarea data-p="'+q+'desc" style="min-height:64px">'+esc(s.desc)+'</textarea>'+
+ '<label>Services page title</label><input data-p="'+q+'pageTitle" value="'+esc(s.pageTitle)+'"><label>Services page text</label><textarea data-p="'+q+'pageDesc" style="min-height:64px">'+esc(s.pageDesc)+'</textarea></div>'}).join('')}
+/* ---------- scripts ---------- */
+function vScripts(){var d=S.script,l=S.c.scripts;return head('Scripts','Add analytics, chat widgets or other code to your site. Goes live only after Publish.')+
+ '<div class="card"><div class="hd"><div class="b">'+(d.id?'Edit script':'Add new script')+'</div>'+(d.id?'<button class="tag" data-act="scNew">+ New</button>':'')+'</div>'+
+ '<label style="margin-top:0">Name</label><input data-sc="name" value="'+esc(d.name)+'" placeholder="Google Analytics (GA4)">'+
+ '<label>Placement</label><div class="tb">'+[['head','Head'],['bodyStart','Body start'],['bodyEnd','Body end']].map(function(x){return'<button class="tag'+(d.placement===x[0]?' on':'')+'" data-act="scPlace" data-v="'+x[0]+'">'+x[1]+'</button>'}).join('')+'</div>'+
+ '<label>Pages</label><input data-sc="pages" value="'+esc(d.pages)+'" placeholder="all"><div class="hint">Type <b>all</b> or page paths separated by commas, e.g. / , /blog.html</div>'+
+ '<label>Script code</label><textarea class="code" data-sc="code" placeholder="&lt;script&gt;...&lt;/script&gt;">'+esc(d.code)+'</textarea>'+
+ '<div class="hint">Only paste code from a source you trust. It runs on every visitor\'s browser.</div><div class="tb" style="margin-top:14px"><button class="btn" data-act="scSave">Save script</button></div></div>'+
+ '<div class="card"><div class="b" style="margin-bottom:6px">Active scripts</div>'+(l.length?l.map(function(s,i){return'<div class="row"><div class="grow"><div class="b">'+esc(s.name)+'</div><div class="sm">'+({head:'Head',bodyStart:'Body start',bodyEnd:'Body end'}[s.placement])+' · '+(s.pages==='all'?'All pages':esc(s.pages))+'</div></div><button class="tag '+(s.enabled?'ok':'dr')+'" data-act="scToggle" data-i="'+i+'">'+(s.enabled?'On':'Off')+'</button><button class="btn g sm" data-act="scEdit" data-i="'+i+'">Edit</button><button class="btn d sm" data-act="scDel" data-i="'+i+'">Delete</button></div>'}).join(''):'<div class="sm">No scripts yet.</div>')+'</div>'}
+/* ---------- blog ---------- */
+function vBlog(){var l=S.c.blog;if(!S.post&&l.length)S.post=l[0].id;var i=postIdx(),p=l[i];
+ var list='<div class="card"><div class="hd"><div class="b">Posts</div><button class="tag" data-act="newPost">+ New post</button></div>'+l.map(function(x){var b=S.base.blog.filter(function(y){return y.id===x.id})[0];var st=x.status==='draft'?'<span class="tag dr">Draft</span>':(!b||JSON.stringify(b)!==JSON.stringify(x)?'<span class="tag">Edited</span>':'<span class="tag ok">Live</span>');
+  return'<div class="row'+(x.id===S.post?' sel':'')+'" data-act="selPost" data-id="'+x.id+'" style="cursor:pointer"><div class="grow"><div class="b">'+esc(x.title||'Untitled')+'</div><div class="sm">'+esc(x.kicker)+'</div></div>'+st+'</div>'}).join('')+'</div>';
+ var q='blog.'+i+'.';
+ var ed=p?'<div class="card"><div class="b">Edit post</div><label style="margin-top:0">Title</label><input data-p="'+q+'title" value="'+esc(p.title)+'">'+
+ '<label>Label (shown above the title)</label><input data-p="'+q+'kicker" value="'+esc(p.kicker)+'"><div class="hint">Example: Guide · Planning · Oct 2026</div>'+
+ '<label>URL slug</label><input id="slugf" data-slug="1" data-p="'+q+'slug" value="'+esc(p.slug)+'">'+
+ '<label>Cover image</label><div style="display:flex;gap:12px;align-items:center;margin-top:6px">'+(p.cover?'<div class="th" style="background-image:url(\''+esc(imgSrc(p.cover))+'\')"></div>':'<div class="th"></div>')+'<button class="btn g sm" data-act="postCover">'+(p.cover?'Change image':'Add image')+'</button>'+(p.cover?'<button class="btn d sm" data-act="postCoverRm">Remove</button>':'')+'</div>'+
+ '<label>Content</label><div class="tb"><button class="btn g sm" data-act="fmt" data-f="b"><b>B</b></button><button class="btn g sm" data-act="fmt" data-f="i"><i>I</i></button><button class="btn g sm" data-act="fmt" data-f="h">H2</button><button class="btn g sm" data-act="fmt" data-f="l">• List</button><button class="btn g sm" data-act="fmt" data-f="a">Link</button></div>'+
+ '<textarea id="body" data-p="'+q+'body" style="min-height:220px">'+esc(p.body)+'</textarea><div class="hint">Leave a blank line between paragraphs. Links: [text](https://...)</div>'+
+ '<label>SEO title</label><input data-p="'+q+'seoTitle" value="'+esc(p.seoTitle||'')+'" placeholder="'+esc(p.title)+' | RNS Construction Mohali"><div class="hint">Saved for future individual post pages.</div>'+
+ '<label>Status</label><select data-p="'+q+'status"><option value="published"'+(p.status!=='draft'?' selected':'')+'>Live</option><option value="draft"'+(p.status==='draft'?' selected':'')+'>Draft (hidden)</option></select>'+
+ '<div class="tb" style="margin-top:16px"><button class="btn" data-act="savePost">Save post</button><button class="btn d" data-act="delPost">Delete</button></div></div>':'<div class="card">No posts yet. Tap + New post.</div>';
+ return head('Blog','Add new posts or edit existing ones. Goes live only after Publish.')+'<div class="blogg">'+list+ed+'</div>'}
+/* ---------- settings ---------- */
+function vSettings(){return head('Settings','Account and session.')+'<div class="card"><div class="b">Session</div><div class="sm" style="margin-top:6px">Mode: '+(DEMO?'Demo (nothing is sent anywhere)':'Live editing of rnsconstructionmohali.com')+'</div><div class="tb" style="margin-top:12px"><button class="btn g" data-act="logout">Sign out</button></div></div>'+
+ '<div class="card"><div class="b">Unpublished changes</div><div class="sm" style="margin:6px 0 12px">Throw away everything you changed since the last publish.</div><button class="btn d" data-act="discard">Discard all changes</button></div>'+
+ '<div class="card"><div class="b">Password</div><div class="sm" style="margin-top:6px">The password is stored in the Cloudflare Worker settings. To change it, update the ADMIN_PASSWORD secret there.</div></div>'}
+/* ---------- actions ---------- */
+function mvArr(a,i,d){var j=i+d;if(j<0||j>=a.length)return;var t=a[i];a[i]=a[j];a[j]=t}
+var acts={
+ newProject:function(){S.c.projects.push({title:'New project',desc:'Short description',image:'',alt:''});touch('projects');save();go('projects');toast('Project added. Change its photo below.');setTimeout(function(){jumpEnd()},50)},
+ projPhoto:function(d){pickImage(function(f){var p=S.c.projects[+d.i];p.image=addFile(f);touch('projects');save();render()})},
+ mv:function(d){mvArr(S.c[d.s],+d.i,+d.d);touch(d.s);save();render()},
+ rm:function(d){if(!cfm('Remove this item?','rm',d))return;S.c[d.s].splice(+d.i,1);touch(d.s);save();render()},
+ newPackage:function(){S.c.packages.push({name:'New package',desc:'Short description',price:'₹0',unit:'per sq. ft.',features:[],hot:false});touch('packages');save();render();jumpEnd()},
+ newReview:function(){S.c.reviews.items=S.c.reviews.items||[];S.c.reviews.items.push({name:'',place:'',stars:5,text:''});touch('reviews');save();render();jumpEnd();toast('Review added. Fill in the form below.')},
+ rmRev:function(d){if(!cfm('Remove this review?','rmRev',d))return;S.c.reviews.items.splice(+d.i,1);touch('reviews');save();render()},
+ scPlace:function(d){S.script.placement=d.v;render()},
+ scNew:function(){S.script={id:'',name:'',placement:'head',pages:'all',code:'',enabled:true};render()},
+ scSave:function(){var d=S.script;if(!d.name.trim()||!d.code.trim()){toast('Add a name and the script code first');return}
+  d.pages=(d.pages||'all').trim()||'all';if(d.id){var i=S.c.scripts.findIndex(function(x){return x.id===d.id});S.c.scripts[i]=clone(d)}else{d.id='s'+Date.now().toString(36);S.c.scripts.push(clone(d))}
+  touch('scripts');S.script={id:'',name:'',placement:'head',pages:'all',code:'',enabled:true};save();render();toast('Script saved. Publish to make it live.')},
+ scEdit:function(d){S.script=clone(S.c.scripts[+d.i]);render();jumpTop()},
+ scToggle:function(d){var s=S.c.scripts[+d.i];s.enabled=!s.enabled;touch('scripts');save();render()},
+ scDel:function(d){if(!cfm('Delete this script?','scDel',d))return;S.c.scripts.splice(+d.i,1);touch('scripts');save();render()},
+ newPost:function(){var id='post-'+Date.now().toString(36);var m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][new Date().getMonth()]+' '+new Date().getFullYear();
+  S.c.blog.unshift({id:id,slug:'new-post',kicker:'Update · '+m,title:'',body:'',cover:'',seoTitle:'',status:'draft'});S.post=id;touch('blog');save();render()},
+ selPost:function(d){S.post=d.id;render()},
+ savePost:function(){var p=S.c.blog[postIdx()];if(!p.title.trim()||!p.body.trim()){toast('Add a title and content first');return}save();toast(p.status==='draft'?'Saved as draft. It stays hidden.':'Post saved. Publish to make it live.');render()},
+ delPost:function(d){if(!cfm('Delete this post?','delPost',d))return;S.c.blog.splice(postIdx(),1);S.post=null;touch('blog');save();render()},
+ postCover:function(){pickImage(function(f){S.c.blog[postIdx()].cover=addFile(f);touch('blog');save();render()})},
+ postCoverRm:function(){S.c.blog[postIdx()].cover='';touch('blog');save();render()},
+ fmt:function(d){var t=$('body'),a=t.selectionStart,b=t.selectionEnd,v=t.value,sel=v.slice(a,b),r;
+  if(d.f==='b')r='**'+(sel||'bold text')+'**';else if(d.f==='i')r='*'+(sel||'italic text')+'*';else if(d.f==='h')r='\n\n## '+(sel||'Heading')+'\n\n';else if(d.f==='l')r='\n\n'+(sel||'First point\nSecond point').split('\n').map(function(x){return'- '+x}).join('\n')+'\n\n';
+  else{var u=window.__lnk;if(!u){var cp=Object.assign({},d);modal('<h3>Link address</h3><input id="lku" placeholder="https://..."><div class="tb" style="margin-top:16px"><button class="btn" id="lky">Add link</button><button class="btn g" onclick="closeM()">Cancel</button></div>');$('lky').onclick=function(){var v=$('lku').value.trim();closeM();if(!v)return;window.__lnk=v;acts.fmt(cp);window.__lnk=null};return}r='['+(sel||'link text')+']('+u+')'}
+  t.value=v.slice(0,a)+r+v.slice(b);S.c.blog[postIdx()].body=t.value;touch('blog');save();t.focus()},
+ logout:function(){logout()},
+ discard:function(d){if(!cfm('Discard all unpublished changes?','discard',d))return;S.c=clone(S.base);S.files={};localStorage.removeItem('rns_draft');S.post=null;render();toast('Changes discarded')}
+};
+/* ---------- blog render (same markup as the live page) ---------- */
+function inline(s){return s.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>').replace(/\*([^*]+)\*/g,'<em>$1</em>').replace(/\[([^\]]+)\]\(([^)\s]+)\)/g,function(m,t,u){var raw=u.replace(/&amp;/g,'&');if(!/^(https?:\/\/|\/|#|mailto:|tel:)/i.test(raw))return t;return'<a href="'+u+'"'+(/^https?:/i.test(raw)?' target="_blank" rel="noopener"':'')+'>'+t+'</a>'})}
+function md(src){var out=[],blocks=esc(src||'').replace(/&#39;/g,"'").replace(/&quot;/g,'"').split(/\n\s*\n/);blocks.forEach(function(b){b=b.trim();if(!b)return;
+ if(/^## /.test(b))out.push('<h4>'+inline(b.slice(3))+'</h4>');else if(/^- /m.test(b)&&b.split('\n').every(function(l){return/^- /.test(l)}))out.push('<ul>'+b.split('\n').map(function(l){return'<li>'+inline(l.slice(2))+'</li>'}).join('')+'</ul>');else out.push('<p>'+inline(b).replace(/\n/g,'<br>')+'</p>')});return out.join('')}
+function postHtml(p){return'<div class="faq-item" id="'+esc(p.slug||p.id)+'"><span class="kicker">'+esc(p.kicker)+'</span>'+(p.cover?'<img src="'+esc(p.cover)+'" alt="'+esc(p.title)+'" loading="lazy" style="width:100%;border-radius:12px;margin:0 0 12px">':'')+'<h3>'+esc(p.title)+'</h3>'+md(p.body)+'</div>'}
+function spliceBlog(raw){var mm=/<div class="faq-item"[^>]*>/.exec(raw),a=mm?mm.index:-1,b=raw.indexOf('<div class="note-strip">');if(a<0||b<a)throw new Error('Blog page layout not recognised. Nothing was published.');
+ var live=S.c.blog.filter(function(p){return p.status!=='draft'});return raw.slice(0,a)+live.map(postHtml).join('')+raw.slice(b)}
+/* ---------- preview / publish ---------- */
+function summary(){var ch=changed(),L=[];ch.forEach(function(s){var a=S.c[s],b=S.base[s];if(Array.isArray(a)){var d=a.length-b.length;L.push(LABEL[s]+': edited'+(d>0?', '+d+' added':d<0?', '+(-d)+' removed':''))}else L.push(LABEL[s]+': edited')});return L}
+var cfPend='',cfTimer=0;function cfm(m,k,d){var key=k+((d&&d.i)||'');if(cfPend===key){cfPend='';clearTimeout(cfTimer);return true}cfPend=key;var sel='[data-act="'+k+'"]'+((d&&d.i!=null&&d.i!=='')?'[data-i="'+d.i+'"]':'');var bt=document.querySelector(sel),old=bt?bt.textContent:'';if(bt)bt.textContent='Tap again to confirm';clearTimeout(cfTimer);cfTimer=setTimeout(function(){cfPend='';if(bt&&bt.isConnected)bt.textContent=old},4000);return false}
+function modal(h){$('mb').innerHTML=h;$('modal').style.display='grid';try{$('mb').scrollIntoView({block:'center'})}catch(e){}}
+function closeM(){$('modal').style.display='none'}
+$('modal').onclick=function(e){if(e.target===this)closeM()};
+function preview(){var s=summary();modal('<h3>Preview changes</h3>'+(s.length?'<ul>'+s.map(function(x){return'<li>'+esc(x)+'</li>'}).join('')+'</ul>':'<div class="sm">No changes yet.</div>')+(changed().indexOf('blog')>=0?'<div class="b" style="margin-top:12px">Blog (as it will appear)</div><div style="max-height:260px;overflow:auto;border:1px solid var(--l);border-radius:10px;padding:12px;margin-top:6px;line-height:1.6">'+S.c.blog.filter(function(p){return p.status!=='draft'}).slice(0,3).map(postHtml).join('<hr>')+'</div>':'')+'<div class="tb" style="margin-top:16px"><button class="btn g" onclick="closeM()">Close</button></div>')}
+function askPublish(){var s=summary();if(!s.length){toast('No changes to publish');return}modal('<h3>Publish to the live site?</h3><ul>'+s.map(function(x){return'<li>'+esc(x)+'</li>'}).join('')+'</ul><div class="sm" style="margin-top:10px">'+(DEMO?'Demo mode: nothing is sent. You will get the content file instead.':'Visitors see the changes in about a minute.')+'</div><div class="tb" style="margin-top:16px"><button class="btn" id="pubgo" onclick="doPublish()">Publish now</button><button class="btn g" onclick="closeM()">Cancel</button></div>')}
+function used(){var u={};S.c.projects.forEach(function(p){u[p.image]=1});S.c.blog.forEach(function(p){if(p.cover)u[p.cover]=1});return u}
+function doPublish(){var b=$('pubgo');b.disabled=true;b.textContent='Publishing...';var ch=changed();
+ var out=clone(S.c);out.blog.forEach(function(p){delete p.slugTouched});out.version=(out.version||1);
+ var files=[{path:'content/content.json',content:JSON.stringify(out,null,1)}];var u=used();
+ Object.keys(S.files).forEach(function(k){if(u[k])files.push({path:k.replace(/^\//,''),base64:S.files[k].base64})});
+ var pre=Promise.resolve();
+ if(ch.indexOf('blog')>=0&&!DEMO)pre=fetch('/blog.html',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('Could not read blog.html');return r.text()}).then(function(raw){files.push({path:'blog.html',content:spliceBlog(raw)})});
+ pre.then(function(){if(DEMO){var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([files[0].content],{type:'application/json'}));a.download='content.json';a.click();return{demo:1}}
+  return api('/api/publish',{method:'POST',body:JSON.stringify({files:files,message:'Admin update: '+ch.map(function(x){return LABEL[x]}).join(', ')})})}).then(function(j){
+  S.base=clone(S.c);S.files={};localStorage.removeItem('rns_draft');closeM();render();toast(j.demo?'Demo publish done. content.json downloaded.':'Published. Live in about 1 minute.',5000)}).catch(function(e){b.disabled=false;b.textContent='Publish now';toast('Publish failed: '+e.message,6000)})}
+window.__rns={S:function(){return S},spliceBlog:spliceBlog,md:md};
+if(S.token&&!DEMO)api('/api/check').then(start).catch(function(){});else if(S.token&&DEMO)start();
+</script></body></html>

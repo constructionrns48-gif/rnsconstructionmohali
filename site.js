@@ -146,3 +146,6 @@
     io.observe(el);
   });
 })();
+
+/* RNS admin content overlay */
+(function(){var s=document.createElement("script");s.src="/rns-overlay.js";s.defer=true;document.head.appendChild(s);})();

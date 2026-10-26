@@ -1,0 +1,225 @@
+{
+ "version": 1,
+ "packages": [
+  {
+   "name": "Civil Construction",
+   "desc": "Brick work and plaster, material + labour.",
+   "price": "₹1,100",
+   "unit": "per sq. ft.",
+   "features": [
+    "Brick work and plaster",
+    "Material and labour included"
+   ],
+   "hot": false
+  },
+  {
+   "name": "Standard Finishing",
+   "desc": "Good-quality standard finishing, material + labour.",
+   "price": "₹2,600 – ₹2,800",
+   "unit": "per sq. ft.",
+   "features": [
+    "Good-quality tiles and flooring",
+    "Semi modular kitchen",
+    "Branded sanitary & electrical fittings"
+   ],
+   "hot": true
+  },
+  {
+   "name": "Premium / Luxury Finishing",
+   "desc": "High-end luxury construction, material + labour.",
+   "price": "₹3,000 – ₹4,500+",
+   "unit": "per sq. ft.",
+   "features": [
+    "Imported / high-end materials",
+    "Custom design",
+    "Luxury finishes"
+   ],
+   "hot": false
+  }
+ ],
+ "projects": [
+  {
+   "title": "Modern Independent House",
+   "desc": "Contemporary elevation with clean lines and premium finish.",
+   "image": "/uploads/seed-project-1.jpg",
+   "alt": "Modern Independent House"
+  },
+  {
+   "title": "Luxury Villa Style",
+   "desc": "Large-format villa design with a modern facade.",
+   "image": "/uploads/seed-project-2.jpg",
+   "alt": "Luxury Villa Style"
+  },
+  {
+   "title": "Exterior Elevation",
+   "desc": "Elevation design ideas for kothis and independent floors.",
+   "image": "/uploads/seed-project-3.jpg",
+   "alt": "Exterior Elevation"
+  },
+  {
+   "title": "Commercial Building",
+   "desc": "Showroom and office building styles.",
+   "image": "/uploads/seed-project-4.jpg",
+   "alt": "Commercial Building"
+  },
+  {
+   "title": "Residential Building",
+   "desc": "Multi-storey residential construction styles.",
+   "image": "/uploads/seed-project-5.jpg",
+   "alt": "Residential Building"
+  },
+  {
+   "title": "Interior Design",
+   "desc": "Premium interior finishes - kitchen, ceiling and lighting.",
+   "image": "/uploads/seed-project-6.jpg",
+   "alt": "Interior Design"
+  }
+ ],
+ "reviews": {
+  "score": "5.0",
+  "stars": "★★★★★",
+  "label": "Google Rating",
+  "heading": "Rated by our customers on Google",
+  "text": "RNS Construction Mohali is rated 5.0 out of 5 by customers on its verified Google Business Profile. Read genuine customer reviews and see what people say about our work.",
+  "linkText": "View Google Reviews",
+  "linkUrl": "https://share.google/OkGZxYW0gj5gXvu1u",
+  "items": []
+ },
+ "services": [
+  {
+   "href": "/services-house-construction.html",
+   "title": "Residential House Construction",
+   "desc": "Modern independent houses, kothis and villas built with quality materials and careful planning.",
+   "pageTitle": "House Construction",
+   "pageDesc": "Complete residential construction from foundation to finishing - houses, kothis, villas and independent floors built with quality branded materials and clear, item-wise estimates."
+  },
+  {
+   "href": "/services-commercial-building.html",
+   "title": "Commercial Building Construction",
+   "desc": "Showrooms, shops, offices and commercial buildings executed to engineering standards.",
+   "pageTitle": "Commercial Building Construction",
+   "pageDesc": "Construction and finishing for commercial buildings, showrooms, shops and offices - handled under one roof, from structure to interiors."
+  },
+  {
+   "href": "/services-turnkey-projects.html",
+   "title": "Turnkey Construction Projects",
+   "desc": "Design to key handover: planning, construction, interiors and finishing by one team.",
+   "pageTitle": "Turnkey Projects",
+   "pageDesc": "Design + Construction + Interiors in one contract. You just take the keys of your dream home. Transparent packages."
+  },
+  {
+   "href": "/services-architectural-design.html",
+   "title": "Architectural & Structural Design",
+   "desc": "Thoughtful architectural drawings and structural engineering for safe, practical buildings.",
+   "pageTitle": "Architectural & Structural Design",
+   "pageDesc": "Architectural planning, structural design and elevation design for houses and commercial buildings - the right drawings before the right construction."
+  },
+  {
+   "href": "/services-interior-design.html",
+   "title": "Interior Design",
+   "desc": "Functional, premium interiors for homes and commercial spaces, matched to your taste.",
+   "pageTitle": "Interior Design",
+   "pageDesc": "Modular kitchen, wardrobes, false ceiling, lighting, flooring and painting - complete interior design packages for new and existing homes."
+  },
+  {
+   "href": "/services-renovation.html",
+   "title": "Home Renovation & Remodelling",
+   "desc": "Renovation, remodelling, repair and extension work that upgrades your existing space.",
+   "pageTitle": "Home Renovation & Remodeling",
+   "pageDesc": "Old house renovation, floor additions, elevation change and complete modern makeovers - with structural checks before any addition."
+  }
+ ],
+ "blog": [
+  {
+   "id": "post-1",
+   "slug": "punjab-building-rules-amended-in-force-from-7-september-2026",
+   "kicker": "Latest · Building Rules · Sep 2026",
+   "title": "Punjab building rules amended - in force from 7 September 2026",
+   "body": "The Punjab Urban Planning and Development Building (Second Amendment) Rules, 2026 were notified on 2 September and published in the Punjab Government Gazette (Extraordinary) on 7 September 2026, in force from that date. Key changes in the official notification (G.S.R.52): maximum floor-to-floor height for booths, shops and shop-cum-offices raised to 5.0 metres - this does not apply to shops or offices inside shopping malls, standalone commercial buildings, multiplexes or mixed-use projects; rooftop solar panel structures up to 2.4 metres clear height no longer count towards building height or FAR; a toilet up to 6 sq m is now permitted on the terrace; a new clearance zone applies for buildings near high-tension lines. These rules apply in areas governed by the Punjab Urban Planning and Development Building Rules, 2021, which cover the GMADA planning area. Note: these provisions are not a blanket permission for every property - always verify the applicable local authority rules and approvals for your specific plot or building before planning. Sources: [Punjab Government Gazette, 7 Sep 2026 (official record copy)](https://archive.org/details/in.gazette.punjabdsa.2026-09-07.92432) and [Hindustan Times, 10 Sep 2026](https://www.hindustantimes.com/cities/chandigarh-news/punjab-eases-building-norms-for-shops-tightens-electrical-fire-safety-rules-101788980710331.html). Verified 13 Oct 2026.",
+   "cover": "",
+   "seoTitle": "",
+   "status": "published"
+  },
+  {
+   "id": "post-2",
+   "slug": "eco-city-3-new-chandigarh-gets-environmental-clearance",
+   "kicker": "Latest · Approvals · Oct 2026",
+   "title": "Eco City 3, New Chandigarh gets environmental clearance",
+   "body": "GMADA's planned Eco City 3 township in New Chandigarh (Mullanpur) has received environmental clearance from Punjab's State Environment Impact Assessment Authority. The township covers 716 acres across nine villages, with residential plots to be allotted by draw of lots and commercial sites by open auction. Important: clearance is an approval milestone, not a launch - no public plot booking, draw dates or prices were found on the GMADA pages checked on 13 October 2026 ([GMADA's Eco City 3 notification page](https://www.gmada.gov.in/en/node/12161) and [gmada.gov.in](https://www.gmada.gov.in/en)). Source: [Times of India, 12 Oct 2026](https://timesofindia.indiatimes.com/city/chandigarh/eco-city-3-clears-key-hurdle-716-acre-new-chandigarh-township-set-to-take-shape/articleshow/134876674.cms). Verified 13 Oct 2026.",
+   "cover": "",
+   "seoTitle": "",
+   "status": "published"
+  },
+  {
+   "id": "post-3",
+   "slug": "gmada-auctions-and-some-project-launches-paused",
+   "kicker": "Latest · Market · Oct 2026",
+   "title": "GMADA auctions and some project launches paused",
+   "body": "Hindustan Times reported on 9 October 2026 that after Enforcement Directorate searches at GMADA in September, the housing department put some activities on hold: the state-wide auction of residential and commercial properties planned for 24 September was postponed, the Eco City-2 (Extension) launch is on hold, and the National Housing and Urban Innovation Summit is deferred to November. Separately, GMADA's [auction notices page](https://gmada.gov.in/en/auction-notices), checked on 13 October 2026, lists no revised date for the postponed auction. If you are waiting for a GMADA auction, plan for revised timelines. Source: [Hindustan Times, 9 Oct 2026](https://www.hindustantimes.com/cities/chandigarh-news/after-ed-searches-gmada-treads-cautiously-puts-projects-auctions-on-hold-101791484644993.html). Verified 13 Oct 2026.",
+   "cover": "",
+   "seoTitle": "",
+   "status": "published"
+  },
+  {
+   "id": "post-4",
+   "slug": "gmada-plans-rs-15-000-crore-raise-for-14-projects",
+   "kicker": "Latest · Development · Oct 2026",
+   "title": "GMADA plans Rs. 15,000 crore raise for 14 projects",
+   "body": "In an affidavit before the Punjab and Haryana High Court, GMADA said it has taken up 14 development projects needing about Rs. 17,686 crore for land acquisition and development, and proposes to raise Rs. 15,000 crore through borrowing under Section 51 of the Punjab Regional and Town Planning Act, 1955. This is a proposal under scrutiny, not sanctioned spending yet. Source: [The Tribune, 9 Oct 2026](https://www.tribuneindia.com/news/punjab/gmada-justifies-15k-cr-fundraising-for-land-acquisition/). Verified 13 Oct 2026.",
+   "cover": "",
+   "seoTitle": "",
+   "status": "published"
+  },
+  {
+   "id": "post-5",
+   "slug": "house-construction-cost-in-mohali-current-package-rates",
+   "kicker": "Rates · Mohali",
+   "title": "House construction cost in Mohali - current package rates",
+   "body": "Civil construction (brick work and plaster, material + labour) currently runs at Rs. 1,100 per sq ft. Turnkey finishing packages: Standard finishing Rs. 2,600-2,800 per sq ft with good-quality tiles, semi modular kitchen and branded fittings; Premium / Luxury finishing Rs. 3,000-4,500+ per sq ft with high-end materials, custom design and luxury finishes. Final cost for any plot depends on size, design, materials and site conditions - a detailed quotation is free on request.",
+   "cover": "",
+   "seoTitle": "",
+   "status": "published"
+  },
+  {
+   "id": "post-6",
+   "slug": "civil-vs-turnkey-construction-which-should-you-choose",
+   "kicker": "Guide · Tricity",
+   "title": "Civil vs turnkey construction - which should you choose?",
+   "body": "Civil construction covers brick work and plaster - material and labour included. It suits owners who want to manage finishing separately or complete the home in stages. Turnkey construction covers design, construction and interiors through to key handover - one team and one clear quotation. Share your plot details and we will help you pick the right scope for your budget.",
+   "cover": "",
+   "seoTitle": "",
+   "status": "published"
+  },
+  {
+   "id": "post-7",
+   "slug": "what-decides-your-final-construction-cost",
+   "kicker": "Guide · Planning",
+   "title": "What decides your final construction cost?",
+   "body": "Plot size and built-up area, the design and drawings, the materials and brands you choose, the finishing level (civil, standard or premium), and site conditions. This is why RNS prepares a clear, item-wise quotation for each project instead of one flat rate multiplied by area. Share your plot details for a free detailed estimate.",
+   "cover": "",
+   "seoTitle": "",
+   "status": "published"
+  },
+  {
+   "id": "post-8",
+   "slug": "planning-to-add-a-floor-check-the-structure-first",
+   "kicker": "Guide · Floor Additions",
+   "title": "Planning to add a floor? Check the structure first",
+   "body": "A first-floor or second-floor addition starts with the existing building, not the new one. The foundation and columns must be assessed for the extra load before scope or cost is agreed. Send existing plans and photos to begin the discussion, and expect an on-site structural review before a final quotation. Planned right, an addition also lets you refresh the elevation at the same time.",
+   "cover": "",
+   "seoTitle": "",
+   "status": "published"
+  },
+  {
+   "id": "post-9",
+   "slug": "5-questions-to-ask-before-finalizing-a-contractor",
+   "kicker": "Guide · Hiring",
+   "title": "5 questions to ask before finalizing a contractor",
+   "body": "1) Will the quotation be item-wise and in writing? 2) Which material brands are included? 3) How will progress be shared - photos, videos, site visits? 4) What is the payment schedule tied to? 5) Who supervises the site daily? Clear answers to these five questions separate dependable teams from the rest.",
+   "cover": "",
+   "seoTitle": "",
+   "status": "published"
+  }
+ ],
+ "scripts": []
+}
