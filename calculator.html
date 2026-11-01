@@ -3,12 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Free construction cost calculator by RNS Construction Mohali. Estimate house construction cost, convert plot area (sq ft, sq yards, kanal, acres) and calculate home loan EMI. Serving Mohali, Chandigarh, Zirakpur, Panchkula & across Punjab.">
-<link rel="canonical" href="https://rnsconstructionmohali.com/calculator.html">
-<meta property="og:title" content="Construction Cost Calculator Mohali | RNS Construction">
-<meta property="og:description" content="Estimate your house construction cost, convert plot area and calculate EMI - free tools by RNS Construction Mohali.">
-<meta property="og:url" content="https://rnsconstructionmohali.com/calculator.html">
-<meta property="og:type" content="website">
 <title>Construction Cost Calculator Mohali | RNS Construction</title>
 <style>
 :root{
@@ -113,7 +107,7 @@ footer a{color:var(--gold2)}
 <header>
   <div class="wrap">
     <a href="/" class="brand">
-      <img src="/assets/logo-11bd119b67.png" alt="RNS Construction Mohali logo" width="46" height="46">
+      <img src="https://rnsconstructionmohali.com/assets/logo-11bd119b67.png" alt="RNS Construction Mohali logo" width="46" height="46">
       <div><div class="bn">RNS <span>Construction</span></div><div class="bs">Mohali · Building Your Dream</div></div>
     </a>
     <nav class="nav" aria-label="Main navigation">
@@ -179,7 +173,8 @@ footer a{color:var(--gold2)}
           <select id="aType">
             <option value="sqft">Square Feet</option>
             <option value="sqyd">Square Yards</option>
-            <option value="kanal" selected>Kanal</option>
+            <option value="kanal" selected>Kanal (500 sq yd)</option>
+            <option value="kanalR">Kanal (5,445 sq ft)</option>
             <option value="sqm">Square Meter</option>
             <option value="acre">Acres</option>
           </select>
@@ -191,7 +186,8 @@ footer a{color:var(--gold2)}
             <div class="rrow"><b>Square Yards:</b><span id="aSqyd">0</span></div>
             <div class="rrow"><b>Square Meter:</b><span id="aSqm">0</span></div>
             <div class="rrow"><b>Acres:</b><span id="aAcre">0</span></div>
-            <div class="rrow"><b>Kanal:</b><span id="aKanal">0</span></div>
+            <div class="rrow"><b>Kanal (500 sq yd):</b><span id="aKanal">0</span></div>
+            <div class="rrow"><b>Kanal (5,445 sq ft):</b><span id="aKanalR">0</span></div>
           </div>
         </div>
       </div>
@@ -304,12 +300,14 @@ function calcArea(){
   if (t === 'sqyd') sqft = v * 9;
   if (t === 'sqm') sqft = v * 10.7639;
   if (t === 'kanal') sqft = v * 4500;
+  if (t === 'kanalR') sqft = v * 5445;
   if (t === 'acre') sqft = v * 43560;
   document.getElementById('aSqft').textContent = fmt(sqft);
   document.getElementById('aSqyd').textContent = (sqft/9).toLocaleString('en-IN',{maximumFractionDigits:2});
   document.getElementById('aSqm').textContent = (sqft/10.7639).toLocaleString('en-IN',{maximumFractionDigits:2});
   document.getElementById('aAcre').textContent = (sqft/43560).toLocaleString('en-IN',{maximumFractionDigits:4});
   document.getElementById('aKanal').textContent = (sqft/4500).toLocaleString('en-IN',{maximumFractionDigits:4});
+  document.getElementById('aKanalR').textContent = (sqft/5445).toLocaleString('en-IN',{maximumFractionDigits:4});
 }
 function calcEmi(){
   const P = +document.getElementById('loan').value;
