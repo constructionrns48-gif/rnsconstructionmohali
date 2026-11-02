@@ -11,7 +11,7 @@
       burger.setAttribute('aria-expanded', 'true'); burger.setAttribute('aria-label', 'Close menu');
       var m = document.createElement('div');
       m.className = 'm-menu open';
-      m.innerHTML = '<a href="/">Home</a><a href="/about.html">About Us</a><a href="/services.html">Services</a>' +
+      m.innerHTML = '<a href="/">Home</a><a href="/calculator.html">Cost Calculator</a><a href="/services.html">Services</a>' +
         '<div class="m-grp">Services</div>' +
         '<a href="/services-house-construction.html">House Construction</a>' +
         '<a href="/services-commercial-building.html">Commercial Building Construction</a>' +
