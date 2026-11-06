@@ -5,6 +5,13 @@
 .rns-chat-map{display:block;text-align:center;background:#fff;color:#0b1d33;border:1.5px solid #b98715;font-weight:700;font-size:.9rem;padding:10px;border-radius:11px;margin-top:8px}
 
 .rns-chat-q.sel{border-color:#b98715;background:#FBF6EA}
+
+/* Homepage desktop spacing: compact section rhythm without removing content. */
+@media (min-width: 769px) {
+  main > .sec { padding-top: 40px; padding-bottom: 48px; }
+  main > .sec .sec-head { margin-bottom: 32px; }
+  .f-bottom { padding-bottom: 90px; }
+}
 </style><style>/* rns-icons/src/site.css */
 :root {
   --navy:#102A43;
@@ -1027,7 +1034,7 @@ a {
 }
 .f-bottom {
   margin-top: 18px;
-  padding: 18px 0 224px;
+  padding: 18px 0 90px;
   border-top: 1px solid rgba(255, 255, 255, .09);
   display: flex;
   justify-content: space-between;
