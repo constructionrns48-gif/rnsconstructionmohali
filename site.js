@@ -1,3 +1,20 @@
+
+/* Reviewed responsive spacing, 6 November 2026. */
+(function () {
+  var path = window.location.pathname;
+  var css = '';
+  if (path === '/' || path === '/index.html') {
+    css = '@media(max-width:768px){#services{padding-bottom:24px}#real-projects{padding-top:24px}#real-projects .sec-head{margin-bottom:28px}}';
+  } else if (["/about.html", "/areas-chandigarh.html", "/areas-kharar.html", "/areas-mohali.html", "/areas-new-chandigarh.html", "/areas-panchkula.html", "/areas-zirakpur.html", "/best-areas-mohali-house-construction-2026.html", "/blog.html", "/construction-calculators-tools.html", "/construction-questions-mohali.html", "/diwali-construction-offer-2026.html", "/faq.html", "/projects.html", "/services-architectural-design.html", "/services-commercial-building.html", "/services-house-construction.html", "/services-interior-design.html", "/services-renovation.html", "/services-turnkey-projects.html", "/services.html", "/terms.html"].indexOf(path) !== -1) {
+    css = '@media(max-width:768px){main>.sec{padding-top:36px;padding-bottom:36px}main>.sec .sec-head{margin-bottom:32px}}@media(min-width:769px){main>.sec{padding-top:48px;padding-bottom:48px}main>.sec .sec-head{margin-bottom:32px}.f-bottom{padding-bottom:90px}}';
+  }
+  if (css && !document.getElementById('rns-approved-spacing-nov6')) {
+    var style = document.createElement('style');
+    style.id = 'rns-approved-spacing-nov6';
+    style.textContent = css;
+    document.head.appendChild(style);
+  }
+})();
 (function () {
   var WA = 'https://wa.me/918750510489?text=';
   function waMsg(t) { return WA + encodeURIComponent(t); }
