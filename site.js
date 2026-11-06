@@ -11,21 +11,25 @@
       burger.setAttribute('aria-expanded', 'true'); burger.setAttribute('aria-label', 'Close menu');
       var m = document.createElement('div');
       m.className = 'm-menu open';
-      m.innerHTML = '<a href="/">Home</a><a href="/calculator.html">Cost Calculator</a><a href="/services.html">Services</a>' +
-        '<div class="m-grp">Services</div>' +
+      // Keep every option reachable above the fixed mobile action bar.
+      m.style.cssText = 'position:absolute;left:0;right:0;top:100%;height:calc(100dvh - ' + document.querySelector('.header .wrap').getBoundingClientRect().bottom + 'px - 72px - env(safe-area-inset-bottom, 0px));overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;';
+      m.innerHTML = '<a href="/">Home</a><a href="/calculator.html">Cost Calculator</a><details class="m-services"><summary>Services <span aria-hidden="true">⌄</span></summary><a href="/services.html">All Services</a>' +
         '<a href="/services-house-construction.html">House Construction</a>' +
         '<a href="/services-commercial-building.html">Commercial Building Construction</a>' +
         '<a href="/services-turnkey-projects.html">Turnkey Projects</a>' +
         '<a href="/services-architectural-design.html">Architectural &amp; Structural Design</a>' +
         '<a href="/services-interior-design.html">Interior Design</a>' +
         '<a href="/services-renovation.html">Home Renovation &amp; Remodeling</a>' +
-        '<a href="/projects.html">Projects</a>' +
-        '<div class="m-grp">Areas We Serve</div>' +
+        '</details><a href="/projects.html">Projects</a>' +
+        '<details class="m-services m-areas"><summary>Areas We Serve <span aria-hidden="true">⌄</span></summary>' +
         '<a href="/areas-mohali.html">Mohali</a><a href="/areas-zirakpur.html">Zirakpur</a><a href="/areas-kharar.html">Kharar</a><a href="/areas-chandigarh.html">Chandigarh</a><a href="/areas-panchkula.html">Panchkula</a>' +
-        '<a href="/faq.html">FAQ</a><a href="/blog.html">Blog</a>' +
+        '</details>' +
         '<a class="btn btn-gold" href="#enquiry">Get Free Quote</a>' +
         '<a class="btn btn-wa" href="' + waMsg('Hello RNS Construction Mohali, I would like to enquire about your construction services. Please contact me regarding my project.') + '" target="_blank" rel="noopener">WhatsApp Enquiry</a>';
       m.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { m.remove(); burger.setAttribute('aria-expanded', 'false'); }); });
+      var menuStyle = document.createElement('style');
+      menuStyle.textContent = '.m-services summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;color:#E6EDF5;font-weight:600;padding:13px 4px;border-bottom:1px solid rgba(255,255,255,.08)}.m-services summary::-webkit-details-marker{display:none}.m-services summary span{transition:transform .2s}.m-services[open] summary span{transform:rotate(180deg)}.m-services>a{padding-left:18px;background:rgba(0,0,0,.09);font-size:.92em}';
+      m.appendChild(menuStyle);
       document.querySelector('.header').appendChild(m);
     });
   }
