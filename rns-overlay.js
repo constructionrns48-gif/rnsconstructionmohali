@@ -15,7 +15,7 @@
     if (m.projects && /^\/projects\.html$/.test(path())) {
       var g = document.querySelector('.proj-grid');
       if (g) g.innerHTML = (c.projects || []).map(function (p) {
-        return '<div class="proj"><img alt="' + esc(p.alt || p.title) + '" loading="lazy" src="' + esc(safeUrl(p.image)) + '"/><div class="pj"><h3>' + esc(p.title) + '</h3><p>' + esc(p.desc) + '</p></div></div>';
+        return '<div class="proj"><img alt="' + esc(p.alt || p.title) + '" loading="lazy" decoding="async"' + (p.width && p.height ? ' width="' + (+p.width) + '" height="' + (+p.height) + '"' : '') + (p.srcset ? ' srcset="' + esc(p.srcset) + '" sizes="(max-width:768px) calc(100vw - 44px), 380px"' : '') + ' src="' + esc(safeUrl(p.image)) + '"/><div class="pj"><h3>' + esc(p.title) + '</h3><p>' + esc(p.desc) + '</p></div></div>';
       }).join('');
     }
     if (m.reviews) {
