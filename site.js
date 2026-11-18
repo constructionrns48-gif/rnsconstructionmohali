@@ -170,3 +170,41 @@
 
 /* RNS admin content overlay */
 (function(){var s=document.createElement("script");s.src="/rns-overlay.js";s.defer=true;document.head.appendChild(s);})();
+
+/* RNS mobile viewport containment, 19 November 2026. */
+(function(){
+  var style=document.createElement('style');style.id='rns-ios-viewport-preview';
+  style.textContent=`
+.rns-mobile-actions{display:contents}
+@media(min-width:769px){.header.rns-header-tight .wrap{flex-wrap:wrap}.header.rns-header-tight .brand,.header.rns-header-tight .nav,.header.rns-header-tight .h-cta{min-width:0}.header.rns-header-tight .nav,.header.rns-header-tight .h-cta{flex-wrap:wrap}}
+@media(max-width:768px){
+html,body{max-width:100%;overflow-x:clip;overscroll-behavior-x:none}
+.header .wrap,.brand,.brand>div,.f-grid>*,.enq-grid>*,.frow>*,.fg{min-width:0}
+.brand{flex:1}.brand img,.burger{flex-shrink:0}.brand .bs{overflow-wrap:anywhere}
+.f-grid{grid-template-columns:minmax(0,1fr)}
+.frow{grid-template-columns:minmax(0,1fr)}
+.f-ct a,.f-brand,.f-dir{overflow-wrap:anywhere}
+.f-soc{flex-wrap:wrap}.f-soc a{flex:0 0 38px}
+.fg input,.fg select,.fg textarea,.f-sub input{min-width:0;max-width:100%;font-size:16px}
+body{padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))}
+body::after{display:none!important}
+.rns-mobile-actions{position:fixed;left:0;right:auto;bottom:0;width:100%;box-sizing:border-box;display:flex;align-items:center;gap:8px;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));min-height:66px;background:var(--navy,#0b1f33);border-top:1px solid rgba(217,164,65,.35);z-index:999}
+.rns-mobile-actions .rns-chat-widget{display:contents}
+.rns-mobile-actions .rns-chat-launch,.rns-mobile-actions .float-quote,.rns-mobile-actions .float-call,.rns-mobile-actions .float-wa{position:static!important;inset:auto!important;flex:0 0 44px;width:44px;height:44px;box-sizing:border-box;transform:none!important;transition:none;box-shadow:none}
+.rns-mobile-actions .rns-chat-launch{margin-right:auto;font-size:0;padding:0}
+.rns-mobile-actions .rns-chat-panel{max-width:calc(100vw - 32px);bottom:calc(80px + env(safe-area-inset-bottom,0px))}
+}
+`;
+  document.head.appendChild(style);
+  var wa=document.querySelector('.float-wa'),call=document.querySelector('.float-call'),quote=document.querySelector('.float-quote'),widget=document.querySelector('.rns-chat-widget');
+  if(!wa||!call||!quote||!widget)return;
+  var bar=document.createElement('nav');bar.className='rns-mobile-actions';bar.setAttribute('aria-label','Quick contact actions');
+  [widget,quote,call,wa].forEach(function(el){bar.appendChild(el)});document.body.appendChild(bar);
+  var vv=window.visualViewport,queued=false;
+  function sync(){queued=false;if(!matchMedia('(max-width:768px)').matches){bar.style.width='';bar.style.left='';bar.style.bottom='';return}var width=vv?vv.width:document.documentElement.clientWidth;bar.style.width=width+'px';bar.style.left=(vv?Math.max(0,vv.offsetLeft):0)+'px';bar.style.bottom=(vv?Math.max(0,innerHeight-vv.height-vv.offsetTop):0)+'px'}
+  function schedule(){if(!queued){queued=true;requestAnimationFrame(sync)}}
+  addEventListener('resize',schedule);addEventListener('orientationchange',schedule);if(vv){vv.addEventListener('resize',schedule);vv.addEventListener('scroll',schedule)}sync();
+})();
+
+/* Wrap the existing header only when its unwrapped layout actually exceeds the viewport. */
+(function(){var h=document.querySelector('.header'),wrap=h&&h.querySelector('.wrap');if(!wrap)return;var queued=false;function fit(){queued=false;h.classList.remove('rns-header-tight');if(innerWidth<=768)return;var limit=document.documentElement.clientWidth;var overflow=Array.from(wrap.children).some(function(e){return e.getBoundingClientRect().right>limit+1});if(overflow)h.classList.add('rns-header-tight')}function schedule(){if(!queued){queued=true;requestAnimationFrame(fit)}}addEventListener('resize',schedule);if(document.fonts)document.fonts.ready.then(schedule);if(window.ResizeObserver){var ro=new ResizeObserver(schedule);ro.observe(wrap);Array.from(wrap.children).forEach(function(e){ro.observe(e)})}schedule()})();
